@@ -51,7 +51,6 @@ const switchTab = (id) => {
 };
 
 const createPost = (post) => {
-  console.log(post)
     const image = post.image;
     const div = document.createElement( "article" );
     div.classList.add( "post" );
@@ -144,7 +143,8 @@ const showPosts = (posts) => {
 };
 
 const displayLikedPosts = () => {
-    const likedPosts = getLikedPosts();
+  document.getElementById("liked").innerHTML = '';
+  const likedPosts = getLikedPosts();
     likedPosts.forEach((post) => {
         const div = createPost(post);
         document.getElementById( "liked" ).appendChild(div);
