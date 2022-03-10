@@ -34,7 +34,8 @@ const switchTab = (id) => {
     if (id === "posts") {
         document.getElementById( "posts" ).style.display = "grid";
         document.getElementById( "liked" ).style.display = "none";
-        document.getElementById( "reported" ).style.display = "none";
+      document.getElementById("reported").style.display = "none";
+      loadQuestionAnswer();
     } else if (id === "liked") {
         document.getElementById( "liked" ).style.display = "block";
         document.getElementById( "posts" ).style.display = "none";
@@ -51,6 +52,7 @@ const switchTab = (id) => {
 };
 
 const createPost = (post) => {
+  
     const image = post.image;
     const div = document.createElement( "article" );
     div.classList.add( "post" );
@@ -133,6 +135,7 @@ const createPost = (post) => {
 };
 
 const showPosts = (posts) => {
+  
     const productsContainer = document.getElementById( "posts" );
     productsContainer.innerHTML = "";
 
@@ -143,6 +146,7 @@ const showPosts = (posts) => {
 };
 
 const displayLikedPosts = () => {
+  document.getElementById("ans-question").innerHTML = "";
   document.getElementById("liked").innerHTML = '';
   const likedPosts = getLikedPosts();
     likedPosts.forEach((post) => {
@@ -152,7 +156,8 @@ const displayLikedPosts = () => {
 };
 
 const displayReportedPosts = () => {
-  document.getElementById("reported").innerHTML = '';
+  document.getElementById("ans-question").innerHTML="";
+   document.getElementById("reported").innerHTML = "";
     const reportedPosts = getReportedPosts();
     reportedPosts.forEach((post) => {
       const div = createPost(post);
@@ -165,5 +170,51 @@ const loadPosts = async () =>{
   posts = await data.json();
   showPosts(posts);
 }
-
+const loadQuestionAnswer=() => {
+  const container = document.getElementById("ans-question");
+  container.innerHTML = `
+  <div>
+        <h1 class="text-center my-5 ">Answering Two Question</h1>
+        <div class="row">
+          <div class="col-md-6 col-12">
+            <div class="">
+              <h2 class="text-center mb-4 p-3">
+                জাভাস্ক্রিপ্ট কিভাবে কাজ করে ?
+              </h2>
+              <p>
+                জাভাস্ক্রিপ্ট একটি ক্লায়েন্ট-সাইড স্ক্রিপ্টিং Language , এবং
+                সবচেয়ে দক্ষ, সাধারণত ব্যবহৃত স্ক্রিপ্টিং ভাষাগুলির মধ্যে একটি।
+                ক্লায়েন্ট-সাইড স্ক্রিপ্টিং ল্যাঙ্গুয়েজ শব্দটির অর্থ হল এটি
+                ওয়েব-ব্রাউজারের ভিতরে ক্লায়েন্ট-সাইডে (বা ক্লায়েন্ট মেশিনে)
+                চলে । এই জাভাস্ক্রিপ্টকে ব্রাউজার এ চালাইতে গেলে ব্রাউজার কে
+                জাভাস্ক্রিপ্ট বুঝতে হয় আর এই জাভাস্ক্রিপ্ট বুঝার জন্য বিভিন্ন
+                ব্রাউজার বিভিন্ন ধরনের জাভাস্ক্রিপ্ট ইঞ্জিন ব্যবহার করে ।
+                উদাহরণস্বরূপ, Google Chrome এর নিজস্ব জাভাস্ক্রিপ্ট ইঞ্জিন
+                রয়েছে যার নাম V8। এই ইঞ্জিন Chrome এর মধ্যে জাভাস্ক্রিপ্ট রান
+                করে
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6 col-12">
+            <div>
+              <h2 class="text-center mb-4 p-3">
+                জাভাস্ক্রিপ্ট ইভেন্ট লুপ কি করে?
+              </h2>
+              <p>
+                javascript overall যখন v8 ইঞ্জিন দিয়ে execute হয় তখন javascript
+                browser এর মধ্যেই থাকে । v8 ইঞ্জিন কোড গুলোকে execute করে কিন্তু
+                ওটাকে manage করে Event Loop । কোনটার পরে কোনটা synchronously এবং
+                asynchronously কাজ করবে সেটা কিন্তু browser এর মধ্যে ইভেন্ট লুপই
+                করে ।যেই কোডটা synchronously execute হইতেছে সেটাকে stack বলা হয়
+                আর যেই কোডটা asynchronously execute হইতেছে সেটাকে Queue বলা হয় ।
+                Event Loop প্রথমে stack কে execute করে তারপর সব stack execute
+                করা শেষ হয়ে গেলে Queue কে execute করে ।
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+  `;
+}
+loadQuestionAnswer();
 loadPosts();
